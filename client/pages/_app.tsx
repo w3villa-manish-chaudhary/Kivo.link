@@ -39,15 +39,7 @@ class MyApp extends App<any> {
     }
 
     return { pageProps, tokenPayload, initialState: store.getState() };
-    // const token =
-    //   ctx.req && (ctx.req as any).cookies && (ctx.req as any).cookies.token;
-    // const tokenPayload: TokenPayload = token ? decode(token) : null;
-
-    // if (tokenPayload) {
-    //   store.dispatch.auth.add(tokenPayload);
-    // }
-
-    // return { pageProps, tokenPayload, initialState: store.getState() };
+    
   }
 
   store: ReturnType<typeof initializeStore>;

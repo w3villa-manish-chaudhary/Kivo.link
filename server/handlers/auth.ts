@@ -77,7 +77,7 @@ export const apikey = authenticate(
 );
 
 // console.log(":::::::::::::::::::::::::::::::::::::::_______________",apikey );
-console.log("Controller of user api key api::::", JSON.stringify(apikey))
+// console.log("Controller of user api key api::::", JSON.stringify(apikey))
 // console.log(":::::::::::::::::::::::::::::::::::::::_______________",jwt );
 
 

@@ -53,20 +53,6 @@ const Header: FC = () => {
   const { isAuthenticated } = useStoreState((s) => s.auth);
   const isMobile = useMedia({ maxWidth: 640 });
 
-  // const login = !isAuthenticated && (
-  //   <Li>
-  //     <ALink
-  //       href="/login"
-  //       title={!DISALLOW_REGISTRATION ? "login / signup" : "login"}
-  //       forButton
-  //       isNextLink
-  //     >
-  //       <Button height={[32, 40]}>
-  //         {!DISALLOW_REGISTRATION ? "Log in / Sign up" : "Log in"}
-  //       </Button>
-  //     </ALink>
-  //   </Li>
-  // );
   const logout = isAuthenticated && (
     <Li>
       <ALink href="/logout" title="logout" fontSize={[14, 16]} isNextLink onClick={() => { localStorage.clear(); }}>
