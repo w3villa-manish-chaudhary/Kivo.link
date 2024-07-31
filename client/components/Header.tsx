@@ -1,6 +1,6 @@
 import { Flex } from "rebass/styled-components";
 import getConfig from "next/config";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Router from "next/router";
 import useMedia from "use-media";
 import Image from "next/image";
@@ -53,17 +53,30 @@ const Header: FC = () => {
   const { isAuthenticated } = useStoreState((s) => s.auth);
   const isMobile = useMedia({ maxWidth: 640 });
 
+  // State to store user email
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  // Fetch user email from localStorage on component mount
+  useEffect(() => {
+    const storedData = localStorage.getItem('user');
+    if (storedData) {
+      const userData = JSON.parse(storedData);
+      setUserEmail(userData.email);
+    }
+  }, [userEmail]);
+
+  const handleEmailClick = () => {
+    if (userEmail) {
+      Router.push('/settings');
+    }
+  };
+
+  
+
   const logout = isAuthenticated && (
     <Li>
       <ALink href="/logout" title="logout" fontSize={[14, 16]} isNextLink onClick={() => { localStorage.clear(); }}>
         Log out
-      </ALink>
-    </Li>
-  );
-  const settings = isAuthenticated && (
-    <Li>
-      <ALink href="/settings" title="Settings" forButton isNextLink>
-        <Button height={[32, 40]}>Settings</Button>
       </ALink>
     </Li>
   );
@@ -160,8 +173,14 @@ const Header: FC = () => {
           </Li>
         )}
         {logout}
-        {settings}
-        {/* {login} */}
+        {/* Removed the settings button */}
+        {userEmail && (
+          <Li>
+            <Button height={[32, 40]} onClick={handleEmailClick}>
+              {userEmail}
+            </Button>
+          </Li>
+        )}
       </RowCenterV>
     </Flex>
   );
